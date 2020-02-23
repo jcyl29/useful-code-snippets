@@ -17,7 +17,7 @@ const emptyRows = [ ...Array(5) ].map((_, i) => {
 ```
 
 ## combining `document.write` and script tags of `type=text/html` to dynamically load polyfill scripts
-using `document.write`, particularly for script tags, will cause a blocking request.  This is useful for loading polyfills before loading the rest of the app code.  It is especially useful if you are doing a feature detection check before making the request to another file containing the polyfill code.  The location of the external file can be stored a script tag of type `text/html`
+using `document.write`, particularly for script tags, will cause a blocking request.  This is useful for loading polyfills before loading the rest of the app code.  It is especially useful if you are doing a feature detection check before making the request to another file containing the polyfill code.  The location of the external file can be stored as a script tag of type `text/html`
 
 Example:
 ```
@@ -28,7 +28,7 @@ Example:
     </script>
     
     // this 2nd script does the feature detection -- it will use document.write to dynamically 
-    // request the polyfill script based on the featue detection check
+    // request the polyfill script based on the feature detection check
     <script>
         (function () {
             if (!Object.assign) {
