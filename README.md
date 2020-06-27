@@ -38,6 +38,52 @@ Example:
     </script>
 ```
 
+## Methods to dedup arrays, i.e. get an unique array
+### With primitive values
+#### Reduce
+```
+['come', 'on', 'come', 'in'].reduce((acc, name) => {
+  if (!acc.includes(name)) {
+    acc.push(name);
+  }
 
+  return acc;
+}, []);  // ["come", "on", "in"]
+```
+#### Filter
+```
+['come', 'on', 'come', 'in'].filter((el, index, arr) => {
+  return arr.indexOf(el) === index;
+});
+```
+#### Set and spread operator
+```
+[...new Set(['come', 'on', 'come', 'in'])]
+```
+### With objects
+#### Distinct property values of an array of objects
+```
+const array = [
+  { id: 1, author: 'gabbi', body: 'react' },
+  { id: 2, author: 'alice', body: 'angular' },
+  { id: 3, author: 'gabbi', body: 'react again' }
+];
 
+const uniqueAuthors = [...new Set(array.map(x => x.author))]; // ['gabbi', 'alice']
+```
+#### With filter, retaining original object structure
+```
+const array = [
+  { id: 3, name: 'Central Microscopy', fiscalYear: 2018 },
+  { id: 5, name: 'Crystallography Facility', fiscalYear: 2018 },
+  { id: 3, name: 'Central Microscopy', fiscalYear: 2017 },
+  { id: 5, name: 'Crystallography Facility', fiscalYear: 2017 }
+];
 
+const byName = array.map(item => item.name);
+
+array.filter((item, index) => byName.indexOf(item.name) === index);
+// returns
+// [{ id: 3, name: "Central Microscopy", fiscalYear: 2018 },
+// { id: 5, name: "Crystallography Facility", fiscalYear: 2018 }]
+```
