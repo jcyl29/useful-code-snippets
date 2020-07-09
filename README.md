@@ -87,3 +87,39 @@ array.filter((item, index) => byName.indexOf(item.name) === index);
 // [{ id: 3, name: "Central Microscopy", fiscalYear: 2018 },
 // { id: 5, name: "Crystallography Facility", fiscalYear: 2018 }]
 ```
+
+## Reversing an array without array.reverse()
+### in place, with a for loop
+```
+function reverseArray(arr) {
+  for (var i=0; i< Math.floor(arr.length/2); i++) {
+    var temp = arr[i]
+    arr[i] = arr[arr.length-1-i]
+    arr[arr.length-1-i] = temp    
+  }
+  return arr  
+}
+```
+### in place, with a while loop
+```
+function inplaceReverse(arr) {
+  var i = 0;
+  while (i < arr.length - 1) {
+    arr.splice(i, 0, arr.pop());
+    i++;
+  }
+  return arr;
+}
+```
+### with copy of the original array, with map and spread operator
+```
+ a.map(a.pop,[...a]); 
+```
+
+### with a copy of the original array, with reduce
+```
+[1, 2, 3].reduce((acc, curr, index, arr) => {
+    acc[arr.length - index - 1] = curr;
+    return acc;
+}, []);
+```
